@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Helpers\ApiResponse;
+
 
 class Handler extends ExceptionHandler
 {
@@ -37,5 +40,21 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+
+    public function render($request, Throwable $e)
+    {
+
+        if ($e instanceof \Illuminate\Validation\ValidationException) {
+            return ApiResponse::error($e->errors(), 422);
+        }
+
+        if ($e instanceof \Illuminate\Auth\AuthenticationException) {
+            return ApiResponse::error('UnAuthenticated', 401);
+        }
+
+
+        return ApiResponse::error($e->getMessage(), 500);
     }
 }
