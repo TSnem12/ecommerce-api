@@ -51,10 +51,18 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof \Illuminate\Auth\AuthenticationException) {
-            return ApiResponse::error('UnAuthenticated', 401);
+            return ApiResponse::error('Unauthenticated', 401);
         }
 
 
-        return ApiResponse::error($e->getMessage(), 500);
+        if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+            return ApiResponse::error('Resource not found', 404);
+        }
+
+        if (app()->environment('local')) {
+            return ApiResponse::error($e->getMessage(), 500);
+        }
+
+        return ApiResponse::error('Internal Server Error', 500);
     }
 }
