@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Helpers\ApiResponse;
 
 class AuthController extends Controller
 {
@@ -25,12 +26,10 @@ class AuthController extends Controller
 
         $token = auth()->login($user);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'User registered successfully.',
+        return ApiResponse::success([
             'token' => $token,
             'user' => $user
-        ]);
+        ], 'User registered successfully.');
     }
 
 
@@ -48,18 +47,13 @@ class AuthController extends Controller
         ]);
 
         if (!$token) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid credentials.'
-            ], 401);
+            return ApiResponse::error('Invalid credentials.', 401);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Login successful.',
+        return ApiResponse::success([
             'token' => $token,
             'user' => auth()->user()
-        ]);
+        ], 'Login successful.');
     }
 
 
@@ -68,9 +62,6 @@ class AuthController extends Controller
 
         auth()->logout();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Logged out successfully.'
-        ]);
+        return ApiResponse::success(null, 'Logged out successfully.');
     }
 }
