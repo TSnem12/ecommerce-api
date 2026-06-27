@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,9 @@ Route::get('/subcategories', [SubCategoryController::class, 'index']);
 Route::get('/subcategories/{id}', [SubCategoryController::class, 'show']);
 Route::put('/subcategories/{id}', [SubCategoryController::class, 'update']);
 Route::delete('/subcategories/{id}', [SubCategoryController::class, 'destroy']);
+
+Route::post('/products', [ProductController::class, 'store']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::put('/products/{id}', [ProductController::class, 'update']);
+Route::delete('/products/{id}', [ProductController::class, 'destroy']);
