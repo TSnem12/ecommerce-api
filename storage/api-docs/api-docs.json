@@ -284,6 +284,15 @@
                 ]
             }
         },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "operationId": "1bfaa78d1c2c3848ab8165c5dadcad3e",
+                "responses": {
+                    "200": {
+                        "description": "Products retrieved successfully"
         "/api/subcategories": {
             "get": {
                 "tags": [
@@ -306,6 +315,9 @@
             },
             "post": {
                 "tags": [
+                    "Products"
+                ],
+                "operationId": "e8185e307706e2cd84bbcf5171e2f09d",
                     "SubCategories"
                 ],
                 "operationId": "596036cf3873c08f709d154b975e687b",
@@ -316,6 +328,10 @@
                             "schema": {
                                 "required": [
                                     "category_id",
+                                    "subcategory_id",
+                                    "name",
+                                    "price",
+                                    "amount"
                                     "name"
                                 ],
                                 "properties": {
@@ -323,6 +339,22 @@
                                         "type": "integer",
                                         "example": "1"
                                     },
+                                    "subcategory_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Sport"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10"
+                                    },
+                                    "amount": {
+                                        "type": "integer",
+                                        "example": "5"
                                     "name": {
                                         "type": "string",
                                         "example": "Sport"
@@ -335,6 +367,10 @@
                 },
                 "responses": {
                     "200": {
+                        "description": "Product inserted successfully"
+                    },
+                    "422": {
+                        "description": "Product failed to be inserted"
                         "description": "SubCategory inserted successfully"
                     },
                     "422": {
@@ -348,6 +384,12 @@
                 ]
             }
         },
+        "/api/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "operationId": "7ab21ddb713501f3d4c2914892c02a21",
         "/api/subcategories/{id}": {
             "get": {
                 "tags": [
@@ -366,6 +408,10 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "Product retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Product not found"
                         "description": "SubCategory retrieved successfully"
                     },
                     "404": {
@@ -380,6 +426,9 @@
             },
             "put": {
                 "tags": [
+                    "Products"
+                ],
+                "operationId": "6a7e11900844cd85cff66e662b82bd4c",
                     "SubCategories"
                 ],
                 "operationId": "6520fbbeaa90154fa0109eeb72ce6664",
@@ -400,6 +449,10 @@
                             "schema": {
                                 "required": [
                                     "category_id",
+                                    "subcategory_id",
+                                    "name",
+                                    "price",
+                                    "amount"
                                     "name"
                                 ],
                                 "properties": {
@@ -407,6 +460,22 @@
                                         "type": "integer",
                                         "example": "1"
                                     },
+                                    "subcategory_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Sport"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "10"
+                                    },
+                                    "amount": {
+                                        "type": "integer",
+                                        "example": "5"
                                     "name": {
                                         "type": "string",
                                         "example": "Sport"
@@ -419,6 +488,10 @@
                 },
                 "responses": {
                     "200": {
+                        "description": "Product updated successfully"
+                    },
+                    "404": {
+                        "description": "Product not found"
                         "description": "SubCategory updated successfully"
                     },
                     "404": {
@@ -433,6 +506,9 @@
             },
             "delete": {
                 "tags": [
+                    "Products"
+                ],
+                "operationId": "e80a6ca46716acee6b47ea1ac91663c0",
                     "SubCategories"
                 ],
                 "operationId": "2b0128b464e15b8da69d359cf2900f0f",
@@ -448,6 +524,10 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "Product deleted successfully"
+                    },
+                    "404": {
+                        "description": "Product not found"
                         "description": "SubCategory deleted successfully"
                     },
                     "404": {
@@ -481,6 +561,8 @@
             "description": "Categories"
         },
         {
+            "name": "Products",
+            "description": "Products"
             "name": "SubCategories",
             "description": "SubCategories"
         }

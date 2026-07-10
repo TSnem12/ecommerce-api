@@ -8,6 +8,38 @@ use App\Helpers\ApiResponse;
 
 class ProductController extends Controller
 {
+
+
+    /**
+     * @OA\Post(
+     *      path="/api/products",
+     *      tags={"Products"},
+     *      security={{"bearerAuth": {}}},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              required={"category_id", "subcategory_id", "name", "price", "amount"},
+     *              @OA\Property(property="category_id", type="integer", example="1"),
+     *              @OA\Property(property="subcategory_id", type="integer", example="1"),
+     *              @OA\Property(property="name", type="string", example="Sport"),
+     *              @OA\Property(property="price", type="number", format="float", example="10"),
+     *              @OA\Property(property="amount", type="integer", example="5")
+     *          )
+     *      ),
+     *      
+     *      @OA\Response(
+     *          response=200,
+     *          description= "Product inserted successfully"
+     *      ),
+     * 
+     *       @OA\Response(
+     *          response=422,
+     *          description= "Product failed to be inserted"
+     *      )
+     * )
+     */
+
+
     public function store(Request $request)
     {
 
@@ -33,6 +65,26 @@ class ProductController extends Controller
         ], 'Product Inserted Successfully');
     }
 
+
+    /**
+     * @OA\Get(
+     *      path="/api/products",
+     *      tags={"Products"},
+     *      security={{"bearerAuth": {}}},
+     *      
+     *      @OA\Response(
+     *          response=200,
+     *          description= "Products retrieved successfully"
+     *      ),
+     * 
+     *       @OA\Response(
+     *          response=401,
+     *          description= "Unauthorized"
+     *      )
+     * )
+     */
+
+
     public function index()
     {
         $products = Product::with('category', 'subcategory')->get();
@@ -43,6 +95,30 @@ class ProductController extends Controller
     }
 
 
+    /**
+     * @OA\Get(
+     *      path="/api/products/{id}",
+     *      tags={"Products"},
+     *      security={{"bearerAuth": {}}},
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="integer")
+     *      ),
+     *      
+     *      @OA\Response(
+     *          response=200,
+     *          description= "Product retrieved successfully"
+     *      ),
+     * 
+     *       @OA\Response(
+     *          response=404,
+     *          description= "Product not found"
+     *      )
+     * )
+     */
+
     public function show($id)
     {
         $product = Product::with('category', 'subcategory')->findOrFail($id);
@@ -51,6 +127,42 @@ class ProductController extends Controller
             'product' => $product,
         ], 'Product Retrieved Successfully');
     }
+
+
+    /**
+     * @OA\Put(
+     *      path="/api/products/{id}",
+     *      tags={"Products"},
+     *      security={{"bearerAuth": {}}},
+     *      @OA\Parameter(
+     *        name="id",
+     *        in="path",
+     *        required=true,
+     *        @OA\Schema(type="integer"),        
+     *      ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"category_id", "subcategory_id", "name", "price", "amount"},
+     *              @OA\Property(property="category_id", type="integer", example="1"),
+     *              @OA\Property(property="subcategory_id", type="integer", example="1"),
+     *              @OA\Property(property="name", type="string", example="Sport"),
+     *              @OA\Property(property="price", type="number", format="float", example="10"),
+     *              @OA\Property(property="amount", type="integer", example="5")
+     *         ),
+     *      ),
+     *      
+     *      @OA\Response(
+     *          response=200,
+     *          description= "Product updated successfully"
+     *      ),
+     * 
+     *       @OA\Response(
+     *          response=404,
+     *          description= "Product not found"
+     *      )
+     * )
+     */
 
 
     public function update(Request $request, $id)
@@ -80,6 +192,33 @@ class ProductController extends Controller
             'product' => $product
         ], "Product Updated Successfully");
     }
+
+
+    /**
+     * @OA\Delete(
+     *      path="/api/products/{id}",
+     *      tags={"Products"},
+     *      security={{"bearerAuth": {}}},
+     *      @OA\Parameter(
+     *        name="id",
+     *        in="path",
+     *        required=true,
+     *        @OA\Schema(type="integer"),        
+     *      ),
+     *    
+     *   
+     *      @OA\Response(
+     *          response=200,
+     *          description= "Product deleted successfully"
+     *      ),
+     * 
+     *       @OA\Response(
+     *          response=404,
+     *          description= "Product not found"
+     *      )
+     * )
+     */
+
 
     public function destroy($id)
     {
