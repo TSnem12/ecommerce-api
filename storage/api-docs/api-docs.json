@@ -293,6 +293,15 @@
                 "responses": {
                     "200": {
                         "description": "Products retrieved successfully"
+        "/api/subcategories": {
+            "get": {
+                "tags": [
+                    "SubCategories"
+                ],
+                "operationId": "329bf50ac12550f84d6a70f7523dbffa",
+                "responses": {
+                    "200": {
+                        "description": "SubCategories retrieved successfully"
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -309,6 +318,9 @@
                     "Products"
                 ],
                 "operationId": "e8185e307706e2cd84bbcf5171e2f09d",
+                    "SubCategories"
+                ],
+                "operationId": "596036cf3873c08f709d154b975e687b",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -320,6 +332,7 @@
                                     "name",
                                     "price",
                                     "amount"
+                                    "name"
                                 ],
                                 "properties": {
                                     "category_id": {
@@ -342,6 +355,9 @@
                                     "amount": {
                                         "type": "integer",
                                         "example": "5"
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Sport"
                                     }
                                 },
                                 "type": "object"
@@ -355,6 +371,10 @@
                     },
                     "422": {
                         "description": "Product failed to be inserted"
+                        "description": "SubCategory inserted successfully"
+                    },
+                    "422": {
+                        "description": "SubCategory failed to be inserted"
                     }
                 },
                 "security": [
@@ -370,6 +390,12 @@
                     "Products"
                 ],
                 "operationId": "7ab21ddb713501f3d4c2914892c02a21",
+        "/api/subcategories/{id}": {
+            "get": {
+                "tags": [
+                    "SubCategories"
+                ],
+                "operationId": "0d0a401a16be23e3fc1631dfe2ea968f",
                 "parameters": [
                     {
                         "name": "id",
@@ -386,6 +412,10 @@
                     },
                     "404": {
                         "description": "Product not found"
+                        "description": "SubCategory retrieved successfully"
+                    },
+                    "404": {
+                        "description": "SubCategory not found"
                     }
                 },
                 "security": [
@@ -399,6 +429,9 @@
                     "Products"
                 ],
                 "operationId": "6a7e11900844cd85cff66e662b82bd4c",
+                    "SubCategories"
+                ],
+                "operationId": "6520fbbeaa90154fa0109eeb72ce6664",
                 "parameters": [
                     {
                         "name": "id",
@@ -420,6 +453,7 @@
                                     "name",
                                     "price",
                                     "amount"
+                                    "name"
                                 ],
                                 "properties": {
                                     "category_id": {
@@ -442,6 +476,9 @@
                                     "amount": {
                                         "type": "integer",
                                         "example": "5"
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Sport"
                                     }
                                 },
                                 "type": "object"
@@ -455,6 +492,10 @@
                     },
                     "404": {
                         "description": "Product not found"
+                        "description": "SubCategory updated successfully"
+                    },
+                    "404": {
+                        "description": "SubCategory not found"
                     }
                 },
                 "security": [
@@ -468,6 +509,9 @@
                     "Products"
                 ],
                 "operationId": "e80a6ca46716acee6b47ea1ac91663c0",
+                    "SubCategories"
+                ],
+                "operationId": "2b0128b464e15b8da69d359cf2900f0f",
                 "parameters": [
                     {
                         "name": "id",
@@ -484,6 +528,10 @@
                     },
                     "404": {
                         "description": "Product not found"
+                        "description": "SubCategory deleted successfully"
+                    },
+                    "404": {
+                        "description": "SubCategory not found"
                     }
                 },
                 "security": [
@@ -515,6 +563,8 @@
         {
             "name": "Products",
             "description": "Products"
+            "name": "SubCategories",
+            "description": "SubCategories"
         }
     ]
 }
